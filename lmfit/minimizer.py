@@ -1087,6 +1087,14 @@ class Minimizer(object):
         result.errorbars = True
         result.nvarys = len(result.var_names)
 
+        # Additionnal variables for PTsampler
+        if ntemps > 1:
+            result.betas = sampler.betas
+            result.acor = sampler.acor
+            result.acceptance_fraction = sampler.acceptance_fraction
+            result.tswap_acceptance_fraction = sampler.tswap_acceptance_fraction
+            result.thermodynamic_integration_log_evidence = sampler.thermodynamic_integration_log_evidence()
+
         if auto_pool is not None:
             auto_pool.terminate()
 
